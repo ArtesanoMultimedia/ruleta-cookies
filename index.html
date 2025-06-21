@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACEPTA COOKIES - Ruleta Musical</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="title">ACEPTA COOKIES</h1>
+            <p class="subtitle">Ruleta Musical Interactiva</p>
+        </header>
+
+        <!-- Estado 1: Ruleta -->
+        <section id="ruleta-section" class="section active">
+            <div class="ruleta-container">
+                <div class="ruleta-wrapper">
+                    <div class="ruleta" id="ruleta">
+                        <div class="sector sector-rojo" data-color="rojo">
+                            <span class="sector-text">ROJO</span>
+                        </div>
+                        <div class="sector sector-azul" data-color="azul">
+                            <span class="sector-text">AZUL</span>
+                        </div>
+                        <div class="sector sector-gris" data-color="gris">
+                            <span class="sector-text">GRIS</span>
+                        </div>
+                        <div class="sector sector-morado" data-color="morado">
+                            <span class="sector-text">MORADO</span>
+                        </div>
+                    </div>
+                    <div class="ruleta-pointer"></div>
+                </div>
+                <button id="girar-ruleta" class="btn-primary">
+                    <span class="btn-text">GIRAR RULETA</span>
+                    <div class="btn-glow"></div>
+                </button>
+            </div>
+        </section>
+
+        <!-- Estado 2: Resultado Persona -->
+        <section id="resultado-persona" class="section">
+            <div class="resultado-container">
+                <h2 class="resultado-title">¡Ha salido!</h2>
+                <div class="color-resultado" id="color-elegido">
+                    <div class="color-circle"></div>
+                    <span class="color-name"></span>
+                </div>
+                <button id="lanzar-dado" class="btn-primary">
+                    <span class="btn-text">LANZAR DADO</span>
+                    <div class="btn-glow"></div>
+                </button>
+            </div>
+        </section>
+
+        <!-- Estado 3: Dado 3D -->
+        <section id="dado-section" class="section">
+            <div class="dado-container">
+                <div class="persona-elegida-mini" id="persona-mini">
+                    <div class="mini-color"></div>
+                    <span class="mini-text"></span>
+                </div>
+                <div class="dado-wrapper">
+                    <canvas id="dado-canvas"></canvas>
+                </div>
+                <div class="dado-instructions">
+                    <p>Toca y arrastra para rotar</p>
+                    <p>Toca el dado para lanzar</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Estado 4: Resultado Final -->
+        <section id="resultado-final" class="section">
+            <div class="final-container">
+                <h2 class="final-title">¡RESULTADO!</h2>
+                <div class="final-resultado">
+                    <div class="final-persona">
+                        <div class="final-color"></div>
+                        <span class="final-color-name"></span>
+                    </div>
+                    <div class="final-plus">+</div>
+                    <div class="final-accion">
+                        <span class="final-accion-text"></span>
+                    </div>
+                </div>
+                <button id="nueva-ronda" class="btn-primary">
+                    <span class="btn-text">NUEVA RONDA</span>
+                    <div class="btn-glow"></div>
+                </button>
+            </div>
+        </section>
+
+        <!-- Partículas de fondo -->
+        <div class="particles" id="particles"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/ruleta.js"></script>
+    <script src="js/dado3d.js"></script>
+</body>
+</html>
