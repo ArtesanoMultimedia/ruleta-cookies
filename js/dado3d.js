@@ -11,14 +11,8 @@ class Dado3D {
         
         // Configuración del dado
         this.actions = ['NÚMERO', 'BESO', 'CANCIÓN', 'ATREVIMIENTO', 'VERDAD', 'BAILE'];
-        this.faceColors = [
-            0xFF4757, // Rojo
-            0x3742FA, // Azul
-            0x57606F, // Gris
-            0xA55EEA, // Morado
-            0x2ED573, // Verde
-            0xFFA502  // Naranja
-        ];
+        // Color uniforme para todas las caras - azul oscuro con buen contraste
+        this.faceColor = 0x2C3E50; // Azul oscuro elegante
         
         // Variables de interacción
         this.mouse = { x: 0, y: 0 };
@@ -26,7 +20,7 @@ class Dado3D {
         this.rotationVelocity = { x: 0, y: 0 };
         
         // Configuración de cámara
-        this.cameraDistance = 5;
+        this.cameraDistance = 4;
         this.cameraTarget = { x: 0, y: 0, z: 0 };
     }
     
@@ -52,8 +46,8 @@ class Dado3D {
     setupScene(canvas) {
         // Crear escena
         this.scene = new THREE.Scene();
-        this.scene.background = new THREE.Color(0x000000);
-        this.scene.background.setHSL(0.6, 0, 0.1);
+        // Sin fondo - transparente
+        this.scene.background = null;
         
         // Configurar cámara
         const aspect = canvas.clientWidth / canvas.clientHeight;
@@ -88,10 +82,10 @@ class Dado3D {
             canvas.width = 256;
             canvas.height = 256;
             
-            // Fondo de la cara
+            // Fondo de la cara - color uniforme
             const gradient = context.createLinearGradient(0, 0, 256, 256);
-            gradient.addColorStop(0, `#${this.faceColors[index].toString(16).padStart(6, '0')}`);
-            gradient.addColorStop(1, `#${this.lightenColor(this.faceColors[index], 0.3).toString(16).padStart(6, '0')}`);
+            gradient.addColorStop(0, `#${this.faceColor.toString(16).padStart(6, '0')}`);
+            gradient.addColorStop(1, `#${this.lightenColor(this.faceColor, 0.2).toString(16).padStart(6, '0')}`);
             
             context.fillStyle = gradient;
             context.fillRect(0, 0, 256, 256);
@@ -416,7 +410,7 @@ class Dado3D {
         for (let i = 0; i < particleCount; i++) {
             const geometry = new THREE.SphereGeometry(0.05, 8, 8);
             const material = new THREE.MeshBasicMaterial({
-                color: this.faceColors[Math.floor(Math.random() * this.faceColors.length)],
+                color: this.faceColor,
                 transparent: true,
                 opacity: 0.8
             });

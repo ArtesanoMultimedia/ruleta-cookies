@@ -47,6 +47,13 @@ class AceptaCookiesApp {
             }
         });
         
+        // Botón lanzar dado en la sección del dado
+        document.getElementById('lanzar-dado-btn').addEventListener('click', () => {
+            if (!this.isAnimating && window.dado3D && !window.dado3D.isSpinning) {
+                window.dado3D.spinDado();
+            }
+        });
+        
         // Botón nueva ronda
         document.getElementById('nueva-ronda').addEventListener('click', () => {
             if (!this.isAnimating) {

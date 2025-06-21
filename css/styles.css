@@ -292,8 +292,8 @@ body {
 }
 
 .dado-wrapper {
-    width: 250px;
-    height: 250px;
+    width: 350px;
+    height: 350px;
     position: relative;
 }
 
@@ -424,8 +424,8 @@ body {
     }
     
     .dado-wrapper {
-        width: 200px;
-        height: 200px;
+        width: 280px;
+        height: 280px;
     }
 }
 
