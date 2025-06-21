@@ -36,35 +36,66 @@ class AceptaCookiesApp {
         // Botón girar carrusel
         const girarCarruselBtn = document.getElementById('girar-carrusel');
         if (girarCarruselBtn) {
-            girarCarruselBtn.addEventListener('click', () => {
+            const handleCarruselSpin = () => {
                 if (!this.isAnimating && window.carrusel && !window.carrusel.isSpinning) {
                     window.carrusel.spin();
                 } else if (!window.carrusel) {
                     console.error('Carrusel no está disponible');
                 }
+            };
+            
+            // Agregar tanto click como touchstart para móviles
+            girarCarruselBtn.addEventListener('click', handleCarruselSpin);
+            girarCarruselBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault(); // Prevenir el click duplicado
+                handleCarruselSpin();
             });
         }
         
         // Botón lanzar dado
-        document.getElementById('lanzar-dado').addEventListener('click', () => {
-            if (!this.isAnimating) {
-                this.showDadoSection();
-            }
-        });
+        const lanzarDadoBtn = document.getElementById('lanzar-dado');
+        if (lanzarDadoBtn) {
+            const handleLanzarDado = () => {
+                if (!this.isAnimating) {
+                    this.showDadoSection();
+                }
+            };
+            lanzarDadoBtn.addEventListener('click', handleLanzarDado);
+            lanzarDadoBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                handleLanzarDado();
+            });
+        }
         
         // Botón lanzar dado en la sección del dado
-        document.getElementById('lanzar-dado-btn').addEventListener('click', () => {
-            if (!this.isAnimating && window.dado3D && !window.dado3D.isSpinning) {
-                window.dado3D.spinDado();
-            }
-        });
+        const lanzarDadoBtnSection = document.getElementById('lanzar-dado-btn');
+        if (lanzarDadoBtnSection) {
+            const handleLanzarDadoSection = () => {
+                if (!this.isAnimating && window.dado3D && !window.dado3D.isSpinning) {
+                    window.dado3D.spinDado();
+                }
+            };
+            lanzarDadoBtnSection.addEventListener('click', handleLanzarDadoSection);
+            lanzarDadoBtnSection.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                handleLanzarDadoSection();
+            });
+        }
         
         // Botón nueva ronda
-        document.getElementById('nueva-ronda').addEventListener('click', () => {
-            if (!this.isAnimating) {
-                this.resetGame();
-            }
-        });
+        const nuevaRondaBtn = document.getElementById('nueva-ronda');
+        if (nuevaRondaBtn) {
+            const handleNuevaRonda = () => {
+                if (!this.isAnimating) {
+                    this.resetGame();
+                }
+            };
+            nuevaRondaBtn.addEventListener('click', handleNuevaRonda);
+            nuevaRondaBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                handleNuevaRonda();
+            });
+        }
         
         // Prevenir zoom en móviles al hacer doble tap
         document.addEventListener('touchstart', (e) => {
