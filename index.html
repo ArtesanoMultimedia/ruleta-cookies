@@ -18,28 +18,36 @@
             <p class="subtitle">Ruleta Musical Interactiva</p>
         </header>
 
-        <!-- Estado 1: Ruleta -->
-        <section id="ruleta-section" class="section active">
-            <div class="ruleta-container">
-                <div class="ruleta-wrapper">
-                    <div class="ruleta" id="ruleta">
-                        <div class="sector sector-rojo" data-color="rojo">
-                            <span class="sector-text">ROJO</span>
+        <!-- Estado 1: Carrusel -->
+        <section id="carrusel-section" class="section active">
+            <div class="carrusel-container">
+                <div class="carrusel-wrapper">
+                    <div class="carrusel-track" id="carrusel-track">
+                        <div class="carrusel-item" data-color="rojo">
+                            <div class="member-photo member-rojo">
+                                <span class="member-name">ROJO</span>
+                            </div>
                         </div>
-                        <div class="sector sector-azul" data-color="azul">
-                            <span class="sector-text">AZUL</span>
+                        <div class="carrusel-item" data-color="azul">
+                            <div class="member-photo member-azul">
+                                <span class="member-name">AZUL</span>
+                            </div>
                         </div>
-                        <div class="sector sector-gris" data-color="gris">
-                            <span class="sector-text">GRIS</span>
+                        <div class="carrusel-item" data-color="gris">
+                            <div class="member-photo member-gris">
+                                <span class="member-name">GRIS</span>
+                            </div>
                         </div>
-                        <div class="sector sector-morado" data-color="morado">
-                            <span class="sector-text">MORADO</span>
+                        <div class="carrusel-item" data-color="morado">
+                            <div class="member-photo member-morado">
+                                <span class="member-name">MORADO</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="ruleta-pointer"></div>
+                    <div class="carrusel-selector"></div>
                 </div>
-                <button id="girar-ruleta" class="btn-primary">
-                    <span class="btn-text">GIRAR RULETA</span>
+                <button id="girar-carrusel" class="btn-primary">
+                    <span class="btn-text">ELEGIR INTEGRANTE</span>
                     <div class="btn-glow"></div>
                 </button>
             </div>
@@ -108,7 +116,7 @@
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/ruleta.js"></script>
+    <script src="js/carrusel.js"></script>
     <script src="js/dado3d.js"></script>
 </body>
 </html>

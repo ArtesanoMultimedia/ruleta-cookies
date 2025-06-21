@@ -134,83 +134,113 @@ body {
     left: 100%;
 }
 
-/* Ruleta */
-.ruleta-container {
+/* Carrusel */
+.carrusel-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 40px;
 }
 
-.ruleta-wrapper {
+.carrusel-wrapper {
     position: relative;
-    width: 300px;
-    height: 300px;
-}
-
-.ruleta {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    position: relative;
+    width: 320px;
+    height: 200px;
     overflow: hidden;
+    border-radius: var(--border-radius);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     box-shadow: var(--shadow-heavy);
-    border: 8px solid rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(10px);
 }
 
-.sector {
-    position: absolute;
-    width: 50%;
-    height: 50%;
-    transform-origin: 100% 100%;
+.carrusel-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+}
+
+.carrusel-item {
+    flex: 0 0 320px;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 20px;
+}
+
+.member-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    box-shadow: var(--shadow-medium);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.member-photo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.member-rojo {
+    background: linear-gradient(135deg, var(--color-rojo), #FF6B7A);
+}
+
+.member-azul {
+    background: linear-gradient(135deg, var(--color-azul), #5A67D8);
+}
+
+.member-gris {
+    background: linear-gradient(135deg, var(--color-gris), #718096);
+}
+
+.member-morado {
+    background: linear-gradient(135deg, var(--color-morado), #B794F6);
+}
+
+.member-name {
+    font-size: 1.2rem;
     font-weight: 800;
-    font-size: 1rem;
     color: white;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-}
-
-.sector-rojo {
-    background: linear-gradient(45deg, var(--color-rojo), #FF6B7A);
-    transform: rotate(0deg);
-}
-
-.sector-azul {
-    background: linear-gradient(45deg, var(--color-azul), #5A67D8);
-    transform: rotate(90deg);
-}
-
-.sector-gris {
-    background: linear-gradient(45deg, var(--color-gris), #718096);
-    transform: rotate(180deg);
-}
-
-.sector-morado {
-    background: linear-gradient(45deg, var(--color-morado), #B794F6);
-    transform: rotate(270deg);
-}
-
-.sector-text {
-    transform: rotate(-45deg);
-    font-size: 1.1rem;
+    text-transform: uppercase;
     letter-spacing: 1px;
+    z-index: 2;
+    position: relative;
 }
 
-.ruleta-pointer {
+.carrusel-selector {
     position: absolute;
-    top: -15px;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 15px solid transparent;
-    border-right: 15px solid transparent;
-    border-top: 30px solid white;
+    transform: translate(-50%, -50%);
+    width: 4px;
+    height: 80%;
+    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.8), transparent);
+    border-radius: 2px;
+    pointer-events: none;
     z-index: 10;
-    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.carrusel-item.selected .member-photo {
+    transform: scale(1.1);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: var(--shadow-heavy), 0 0 30px rgba(255, 255, 255, 0.3);
 }
 
 /* Resultado Persona */
@@ -409,9 +439,22 @@ body {
         padding: 15px;
     }
     
-    .ruleta-wrapper {
-        width: 250px;
-        height: 250px;
+    .carrusel-wrapper {
+        width: 280px;
+        height: 180px;
+    }
+    
+    .carrusel-item {
+        flex: 0 0 280px;
+    }
+    
+    .member-photo {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .member-name {
+        font-size: 1rem;
     }
     
     .final-resultado {

@@ -23,20 +23,20 @@ class AceptaCookiesApp {
     init() {
         this.setupEventListeners();
         this.createParticles();
-        this.showSection('ruleta-section');
+        this.showSection('carrusel-section');
         
         // Animación de entrada inicial
         setTimeout(() => {
             document.querySelector('.header').classList.add('section-enter');
-            document.querySelector('#ruleta-section').classList.add('section-enter');
+            document.querySelector('#carrusel-section').classList.add('section-enter');
         }, 100);
     }
     
     setupEventListeners() {
-        // Botón girar ruleta
-        document.getElementById('girar-ruleta').addEventListener('click', () => {
-            if (!this.isAnimating) {
-                this.spinRuleta();
+        // Botón girar carrusel
+        document.getElementById('girar-carrusel').addEventListener('click', () => {
+            if (!this.isAnimating && window.carrusel && !window.carrusel.isSpinning) {
+                window.carrusel.spin();
             }
         });
         
@@ -195,6 +195,11 @@ class AceptaCookiesApp {
         }
     }
     
+    onCarruselResult(color) {
+        this.selectedColor = color;
+        this.showColorResult();
+    }
+    
     onDadoResult(action) {
         this.selectedAction = action;
         this.showFinalResult();
@@ -243,9 +248,10 @@ class AceptaCookiesApp {
         // Limpiar confeti
         this.clearConfetti();
         
-        // Resetear ruleta
-        const ruleta = document.getElementById('ruleta');
-        ruleta.style.transform = 'rotate(0deg)';
+        // Resetear carrusel si existe
+        if (window.carrusel && window.carrusel.reset) {
+            window.carrusel.reset();
+        }
         
         // Resetear dado 3D si existe
         if (window.dado3D && window.dado3D.reset) {
@@ -254,7 +260,7 @@ class AceptaCookiesApp {
         
         // Volver a la sección inicial
         setTimeout(() => {
-            this.showSection('ruleta-section');
+            this.showSection('carrusel-section');
             this.isAnimating = false;
         }, 300);
     }
