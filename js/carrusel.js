@@ -199,5 +199,7 @@ class Carrusel {
     }
 }
 
-// Inicializar carrusel
-window.carrusel = new Carrusel();
+// Inicializar carrusel cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', () => {
+    window.carrusel = new Carrusel();
+});

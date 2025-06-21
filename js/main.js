@@ -34,11 +34,16 @@ class AceptaCookiesApp {
     
     setupEventListeners() {
         // Botón girar carrusel
-        document.getElementById('girar-carrusel').addEventListener('click', () => {
-            if (!this.isAnimating && window.carrusel && !window.carrusel.isSpinning) {
-                window.carrusel.spin();
-            }
-        });
+        const girarCarruselBtn = document.getElementById('girar-carrusel');
+        if (girarCarruselBtn) {
+            girarCarruselBtn.addEventListener('click', () => {
+                if (!this.isAnimating && window.carrusel && !window.carrusel.isSpinning) {
+                    window.carrusel.spin();
+                } else if (!window.carrusel) {
+                    console.error('Carrusel no está disponible');
+                }
+            });
+        }
         
         // Botón lanzar dado
         document.getElementById('lanzar-dado').addEventListener('click', () => {
