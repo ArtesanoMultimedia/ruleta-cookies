@@ -232,16 +232,24 @@ class Dado3D {
         if (this.isSpinning) return;
         
         event.preventDefault();
+        event.stopPropagation();
+        
         if (event.touches.length === 1) {
             this.isDragging = true;
             this.updateTouchPosition(event.touches[0]);
             this.previousMouse = { ...this.mouse };
             this.rotationVelocity = { x: 0, y: 0 };
+            
+            // Agregar listeners al documento para capturar movimientos fuera del canvas
+            document.addEventListener('touchmove', this.onDocumentTouchMove.bind(this), { passive: false });
+            document.addEventListener('touchend', this.onDocumentTouchEnd.bind(this), { passive: false });
         }
     }
     
     onTouchMove(event) {
         event.preventDefault();
+        event.stopPropagation();
+        
         if (event.touches.length === 1 && this.isDragging && !this.isSpinning) {
             this.updateTouchPosition(event.touches[0]);
             this.rotateDado();
@@ -250,9 +258,40 @@ class Dado3D {
     
     onTouchEnd(event) {
         event.preventDefault();
+        event.stopPropagation();
+        
         if (event.touches.length === 0) {
             this.isDragging = false;
+            
+            // Remover listeners del documento
+            document.removeEventListener('touchmove', this.onDocumentTouchMove);
+            document.removeEventListener('touchend', this.onDocumentTouchEnd);
+            
+            // Si no hubo arrastre significativo, considerar como tap para lanzar
+            if (Math.abs(this.rotationVelocity.x) < 0.1 && Math.abs(this.rotationVelocity.y) < 0.1) {
+                setTimeout(() => {
+                    if (!this.isSpinning) {
+                        this.spinDado();
+                    }
+                }, 100);
+            }
         }
+    }
+    
+    onDocumentTouchMove(event) {
+        if (!this.isDragging || this.isSpinning) return;
+        
+        event.preventDefault();
+        event.stopPropagation();
+        
+        if (event.touches.length === 1) {
+            this.updateTouchPosition(event.touches[0]);
+            this.rotateDado();
+        }
+    }
+    
+    onDocumentTouchEnd(event) {
+        this.onTouchEnd(event);
     }
     
     onClick(event) {
